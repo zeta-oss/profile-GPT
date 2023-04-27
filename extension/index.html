@@ -1,0 +1,104 @@
+<head>
+    <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="index.js"></script>
+</head>
+
+<body>
+    <main>
+        <div class="form-group" style="border:2px solid blue;box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
+        <input type="text" id="pos" class="text-primary form-control" style="height:50px;color:blue;" placeholder="Position looking for"/>
+        <hr/>
+        <input type="text" id="name" class="text-primary form-control" style="height:50px;color:blue;" placeholder="Has a referal? Provide the name"/>
+
+        <hr/>
+        <label for="empty" id="empt"></label>
+        <button id="btns" class="btn btn-success" style="background-color: green;border-radius: 50px;color:wheat;font-weight: bold;">Let's Hire</button>
+        <button id="btn-clear" class="btn btn-warning" style="border-radius: 50px;color:red;">Clear</button>
+    </div>
+    <div class="container" style="background-color: rgb(83, 15, 240);">
+        <details>
+            <summary class="text-success" style="font-weight: bold;">Expand to Get Hits</summary>
+            
+       <iframe src="" id="result"  width="100%" height="100%" style="border-top-left-radius: 4px solid white;"></iframe>
+        </details>
+       
+    </div></main>
+    <script>
+        window.onload=()=>{ document.getElementById("btns").onclick=showdata;
+document.getElementById("btn-clear").onclick=cleardata;
+function cleardata() {
+    document.querySelector("#result").setAttribute("src","");
+    document.getElementById("pos").innerHTML="";
+    document.getElementById("name").innerHTML="";
+}
+function showdata() {
+    /*
+    const fetchblog=async (topic)=>{
+       const txt= await  fetch(`http://localhost:5000/blog/${topic}`,{
+        mode:"cors",
+        headers:{
+            'Acsess-Control-Allow-Origin' : 'http://localhost:5000'
+        }
+        }).then((resp)=>{
+            if(resp.ok) {
+                resp.json().then(data=>console.log(data));
+            } else {
+                console.log("not ok");
+                resp.json().catch(err=>console.log(err));
+            }
+        });
+        document.querySelector("#resp").innerHTML=JSON.stringify(txt);
+     };
+
+     
+     const fetchsummary=async (blog)=>{
+         await fetch(`http://localhost:5000/blogsummary/${blog}`,{
+             method:"GET",
+             mode:'cors'
+            }).then((resp)=>console.log(resp)).then(
+             (data)=>{document.querySelector("#summ").innerHTML=data}).catch(err=>console.log(err));
+     }
+     
+     let topic=document.querySelector("#prompt").value;
+     console.log(`Topic: ${topic}`);
+     
+     (async ()=>{await fetchblog(topic)})();
+     
+     (async ()=>{await fetchsummary(document.querySelector("#resp").value)})();
+     */
+
+     let position=document.getElementById("pos").value;
+     console.log(position);
+     let ref_name=document.getElementById("name").value;
+     console.log(ref_name);
+
+//      let blog=jQuery((`http://localhost:5000/blog/${topic}#blog`).replace(/ /g,"%20")).text();
+
+   //  jQuery("#blog").attr("src",`http://localhost:8081/blog/${topic}`);
+     //jQuery("#summ").attr("src",`http://localhost:8081/blogsummary?topic=${topic}`);
+     if(ref_name.trim()=="" && position.trim()=="") {
+        document.querySelector("#result").innerHTML="Please enter the position looking for";
+     } else if(ref_name.trim()=="") {
+     document.querySelector("#result").setAttribute("src",`http://localhost:8082/search-cand/${position.trim()}`);
+     } else {
+        document.querySelector("#result").setAttribute("src",`http://localhost:8082/referal-cand/${position.trim()}/${ref_name.trim()}`);
+     }
+    // document.querySelector("#summ").setAttribute("src",`http://localhost:8081/blogsummary?topic=${topic}`);
+    
+     
+} 
+}
+    </script>
+   
+</body>
