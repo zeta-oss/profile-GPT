@@ -9,7 +9,7 @@ import requests
 
 app=Flask(__name__)
 
-openai.api_key="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"
+openai.api_key="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"
 
 
 def create_job_summary(job_title):
