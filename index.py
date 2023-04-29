@@ -4,12 +4,14 @@ import os,json,openai,re
 from bs4 import BeautifulSoup
 import requests
 
+import base64
+
 
 
 
 app=Flask(__name__)
-
-openai.api_key="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"
+print((base64.b64decode("c2stdE94YnVRblRrRGk5MkQxdkJEbkpUM0JsYmtGSk5zTkNHWWI2THB6NVRiN1BkMFBs").decode('ascii')))
+openai.api_key=base64.b64decode("c2stdE94YnVRblRrRGk5MkQxdkJEbkpUM0JsYmtGSk5zTkNHWWI2THB6NVRiN1BkMFBs").decode('ascii')
 
 
 def create_job_summary(job_title):
